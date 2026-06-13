@@ -131,7 +131,7 @@ wheels = [
 ]
 
 [[package]]
-name = "docs-markdown"
+name = "docs-service"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
