@@ -1,7 +1,13 @@
 # Dịch vụ thanh toán (payment service)
 
 Sơ đồ tổng quan về Dịch vụ thanh toán (payment service)
+
+
+
 ![alt text](images/payment-kafka-event.png)
+
+
+
 
 Mục đích:
 Dịch vụ thanh toán (payment service)
