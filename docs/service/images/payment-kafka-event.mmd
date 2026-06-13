@@ -1,0 +1,39 @@
+flowchart TD
+    %% Khai báo node theo thứ tự mong muốn xuất hiện
+    Redis[("Redis & BullMQ")]
+    PaymentGateway(("Cổng Thanh Toán"))
+    Broker[["Kafka"]]
+
+    subgraph CoreDomain [Core Subdomain]
+        ConversationService["Conversation Service"]
+    end
+
+    subgraph SupportDomain [Supporting Subdomain]
+        DocumentService["Document Service"]
+    end
+
+    subgraph GenericDomain [Generic Subdomain]
+        PaymentService["Payment Service"]
+    end
+
+    %% Sắp xếp thứ tự các liên kết để định hình layout trái -> phải
+    PaymentService <-->|"Lên lịch tác vụ (BullMQ)"| Redis
+    PaymentService <-->|"Xử lý giao dịch"| PaymentGateway
+    PaymentService -->|"Publish Event: payment_success"| Broker
+
+    %% ConversationService <-->|"Event: Chat & Share"| Broker
+
+    Broker -.->|"Consume Event: payment_success"| DocumentService
+    Broker -.->|"Consume Event: payment_success"| ConversationService
+
+    classDef core fill:#e1f5fe,stroke:#03a9f4,stroke-width:2px,color:#000
+    classDef support fill:#f3e5f5,stroke:#9c27b0,stroke-width:2px,color:#000
+    classDef generic fill:#fff3e0,stroke:#ff9800,stroke-width:2px,color:#000
+
+    class ConversationService core
+    class DocumentService support
+    class PaymentService generic
+
+    style Redis fill:#ffebee,stroke:#d32f2f,stroke-width:2px,color:#c62828
+    style Broker fill:#ffe0b2,stroke:#f57c00,stroke-width:2px,color:#e65100
+    style PaymentGateway fill:#fffde7,stroke:#fbc02d,stroke-width:2px,color:#000

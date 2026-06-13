@@ -1,0 +1,132 @@
+%% Client <-->|"WebRTC Stream (VIP Voice)"| LiveKit(("LiveKit Server\n(Voice Chat Engine)"))
+
+
+
+
+
+
+
+
+        SupabaseAuth[("Supabase Auth\n(Google Sign-In)")]
+%% SupabaseStorage[("Supabase Storage\n(Persona Avatars & Audios)")]
+
+        NeonDB_Settings[("Neon Postgres\n(User Settings DB)")]
+
+        NeonDB_Services[("Neon Postgres\n(Microservices DBs)")]
+
+        Pinecone[("Pinecone\n(VBPL Vectors)")]
+        Qdrant[("Qdrant\n(Pháp điển Vectors)")]
+%% Milvus[("Milvus\n(VIP User Files Vectors)")]
+
+
+    %% Nhóm Message Broker & Cache
+    subgraph Brokers [Brokers & Caches]
+        Kafka[["Kafka Broker\n(Events: payment-events)"]]
+        RabbitMQ[["RabbitMQ Broker\n(Celery Tasks, Chat/Share events)"]]
+%% RedisCache[("Redis Caches\n(Persona Cache & BullMQ Queue)")]
+    end
+
+    %% Nhóm Core Services (Vùng Cốt lõi)
+    subgraph CoreDomain [Vùng Cốt lõi - Core Domain]
+        ConvService["Conversation Service\n(NestJS - Chat, Bookmark, Share)"]
+        ChatbotService["Chatbot Service\n(Python - Langgraph Agentic AI)"]
+%% PersonaService["Persona Service\n(Python - Trợ lý ảo & TTS config)"]
+    end
+
+    %% Nhóm Supporting Services (Vùng Hỗ trợ)
+    subgraph SupportDomain [Vùng Hỗ trợ - Supporting]
+        DocService["Document Service\n(FastAPI - Quản lý File VIP)"]
+%% DocWorker["Document Worker\n(Celery Worker - Parsing & RAG)"]
+%% PipelinePhapdien["Data Pipeline Pháp điển\n(Moj.gov.vn -> DB & Qdrant)"]
+%% PipelineVBPL["Data Pipeline VBPL\n(Scraper -> DB & Pinecone)"]
+    end
+
+    %% Nhóm Generic Services (Vùng Chung)
+    subgraph GenericDomain [Vùng Chung - Generic]
+        PaymentService["Payment Service\n(NestJS - VIP Gói cước & Hóa đơn)"]
+    end
+
+    %% External Systems
+    LLM(("LLM APIs\n(NVIDIA, Groq, Grok)"))
+    Payment(("Cổng Thanh Toán\n(VNPay, Momo, Zalo)"))
+
+    %% --- ĐỊNH NGHĨA LUỒNG GIAO TIẾP ---
+
+    %% Gateway to Services
+    Gateway -->|"Auth Google / JWT Verification"| SupabaseAuth
+    Gateway -->|"Proxy PostgREST (GET/POST Settings)"| NeonDB_Settings
+    Gateway -->|"RESTful APIs (Chat, Bookmark)"| ConvService
+    Gateway -->|"CRUD Persona, Voice Test"| PersonaService
+    Gateway -->|"Upload Document"| DocService
+    Gateway -->|"Mua gói VIP / Lịch sử GD"| PaymentService
+
+    %% Service to Database / Storage / Cache
+    ConvService <-->|"Đọc/Ghi Metadata"| NeonDB_Services
+    PersonaService <-->|"Đọc/Ghi Persona configs"| NeonDB_Services
+    PersonaService <-->|"Upload Avatars & Audios"| SupabaseStorage
+    PersonaService <-->|"Cache configurations"| RedisCache
+
+    %% Payment Luồng
+    PaymentService <-->|"Tạo liên kết thanh toán"| Payment
+    PaymentService <-->|"Lên lịch kiểm tra / hủy (BullMQ)"| RedisCache
+    PaymentService -->|"Bắn Event: payment_success"| Kafka
+
+    %% Consumer Payment Events từ Kafka
+    Kafka -.->|"Lắng nghe: payment_success\n(Cập nhật VIP local)"| ConvService
+    Kafka -.->|"Lắng nghe: payment_success\n(Mở khóa VIP tải file)"| DocService
+
+    %% Document Processing Luồng (VIP)
+    DocService <-->|"Lưu File metadata"| NeonDB_Services
+    DocService -->|"Lưu file vật lý gốc"| R2
+    DocService -->|"Đẩy task xử lý (Celery)"| RabbitMQ
+
+    RabbitMQ -.->|"Consumes task"| DocWorker
+    DocWorker <-->|"Tải file gốc / Upload Markdown & Summary"| R2
+    DocWorker -->|"Trích xuất & Vector hóa (Docling)"| Milvus
+    DocWorker <-->|"Cập nhật trạng thái COMPLETED"| NeonDB_Services
+
+    %% Conversation & Chatbot Luồng (Quan trọng)
+    ConvService <-->|"gRPC / gRPC Stream\n(AskAI & token stream)"| ChatbotService
+    ConvService -->|"Publish: chat_deletions, share_generated, share_revoked"| RabbitMQ
+
+    %% RabbitMQ to Chatbot
+    RabbitMQ -.->|"Consumes: chat_deletions\n(Xóa lịch sử AI context)"| ChatbotService
+    RabbitMQ -.->|"Consumes: share_generated\n(Sinh HTML Share tĩnh)"| ChatbotService
+    RabbitMQ -.->|"Consumes: share_revoked\n(Xóa HTML Share tĩnh khỏi R2)"| ChatbotService
+    ChatbotService -->|"Publish: share_upload_completed"| RabbitMQ
+    RabbitMQ -.->|"Consumes: share_upload_completed\n(Hoàn tất link share)"| ConvService
+
+    %% Chatbot query RAG & AI Reasoning
+    ChatbotService <-->|"HTTP: Lấy cấu hình Persona"| PersonaService
+    ChatbotService <-->|"RAG: Truy vấn văn bản pháp luật"| Pinecone
+    ChatbotService <-->|"RAG: Truy vấn Pháp điển"| Qdrant
+    ChatbotService <-->|"RAG: Truy vấn File VIP"| Milvus
+    ChatbotService <-->|"Truy vấn thông tin chi tiết VBPL"| NeonDB_Services
+    ChatbotService <-->|"Suy luận AI Agent"| LLM
+    ChatbotService <-->|"Kết nối luồng Audio"| LiveKit
+
+    %% Pipeline Luồng nạp dữ liệu
+    PipelinePhapdien -->|"Lưu dữ liệu văn bản quan hệ"| NeonDB_Services
+    PipelinePhapdien -->|"Lưu vector Pháp điển"| Qdrant
+    PipelineVBPL -->|"Lưu dữ liệu văn bản VBPL"| NeonDB_Services
+    PipelineVBPL -->|"Lưu vector VBPL"| Pinecone
+
+    %% Style Định dạng màu sắc chung
+    classDef core fill:#e1f5fe,stroke:#03a9f4,stroke-width:2px,color:#000
+    classDef support fill:#f3e5f5,stroke:#9c27b0,stroke-width:2px,color:#000
+    classDef generic fill:#fff3e0,stroke:#ff9800,stroke-width:2px,color:#000
+    classDef db fill:#e8f5e9,stroke:#4caf50,stroke-width:2px,color:#000
+    classDef broker fill:#ffebee,stroke:#d32f2f,stroke-width:2px,color:#c62828
+
+    class ConvService,ChatbotService,PersonaService core
+    class DocService,DocWorker,PipelinePhapdien,PipelineVBPL support
+    class PaymentService generic
+    class SupabaseAuth,SupabaseStorage,NeonDB_Settings,NeonDB_Services,Pinecone,Qdrant,Milvus,R2 db
+    class Kafka,RabbitMQ,RedisCache broker
+
+    %% --- TÔ MÀU ĐỘC LẬP THEO YÊU CẦU ---
+    style Client fill:#e3f2fd,stroke:#1e88e5,stroke-width:2px,color:#000
+    style Gateway fill:#eceff1,stroke:#607d8b,stroke-width:2px,color:#000
+    style LLM fill:#ede7f6,stroke:#5e35b1,stroke-width:2px,color:#000
+    style Payment fill:#fffde7,stroke:#fbc02d,stroke-width:2px,color:#000
+    style LiveKit fill:#e0f2f1,stroke:#00695c,stroke-width:2px,color:#000

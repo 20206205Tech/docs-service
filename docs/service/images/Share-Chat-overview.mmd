@@ -1,0 +1,34 @@
+flowchart LR
+    subgraph Core ["⚙️ API Services"]
+        NestJS["NestJS"]
+    end
+
+    subgraph Broker ["📫 Message Queue"]
+        MQ[("RabbitMQ")]
+    end
+
+    subgraph Worker ["🐍 Background Worker"]
+        Python["Python Service"]
+    end
+
+    subgraph Storage ["☁️ Cloud Storage"]
+        R2[("Cloudflare R2")]
+    end
+
+    %% Cập nhật số thứ tự tại đây
+    NestJS -->|"1. Gửi Job"| MQ
+    MQ -->|"2. Nhận Job"| Python
+
+    %% Storage Activity
+    Python <-->|"3. Tải lên File"| R2
+
+    %% Callback Flow (Python -> NestJS)
+    Python -->|"4. Gửi kết quả URL"| MQ
+    MQ -->|"5. Cập nhật DB"| NestJS
+
+    classDef default fill:#f9f9f9,stroke:#333,stroke-width:2px;
+    classDef broker fill:#fff3e0,stroke:#ff9800,stroke-width:2px;
+    classDef storage fill:#e3f2fd,stroke:#2196f3,stroke-width:2px;
+
+    class MQ broker;
+    class R2 storage;
