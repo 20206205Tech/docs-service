@@ -4,4 +4,21 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "environs>=15.0.1",
+    "loguru>=0.7.3",
+    "mkdocs>=1.6.1",
+    "mkdocs-material>=9.7.6",
+    "mkdocs-nav-weight>=0.3.0",
+    "plantuml>=0.3.0",
+]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.5.1",
+    "taskipy>=1.14.1",
+]
+
+[tool.taskipy.tasks]
+start = "mkdocs serve"
+build = "mkdocs build"
