@@ -55,6 +55,9 @@ Xử lý Callback (IPN): Cung cấp các endpoint (nhận cả GET và POST ) đ
 Xử lý Return URL: Cung cấp các endpoint (nhận cả GET và POST ) để tiếp nhận và điều hướng giao diện người dùng ngay sau khi họ hoàn tất thao tác trên trang thanh toán của đối tác.
 
 Các API chính trong tài liệu swagger API Dịch vụ thanh toán (payment service)
+
+
+
 ![alt text](images/payment-swagger.png)
 
 Trong quá trình phát triển đồ án, em tìm kiếm dịch vụ cung cấp sẵn về thanh toán
@@ -72,6 +75,8 @@ Triển khai Dịch vụ thanh toán (payment service) độc lập tại heroku
 ![alt text](images/payment-heroku.png)
 
 Thông tin kiểm tra tự động của Pull Request trên GitHub
+
+
 ![alt text](images/image-14.png)
 
 Các bước CI/CD tự động test trên github action
@@ -79,12 +84,43 @@ Các bước CI/CD tự động test trên github action
 ![alt text](images/payment-test.png)
 
 Quản lý các di chuyển cơ sở dữ liệu trong github action
+
+
+
 ![alt text](images/payment-database-migration.png)
 
 Các bảng có trong cơ sở dữ liệu của Dịch vụ thanh toán (payment service)
+
+
+
+
 ![alt text](images/payment-database.png)
 
-<!-- IPN -->
+
+
+
+
+
+
+
+
+Instant Payment Notification
+(IPN)
+được sử dụng để
+Đơn vị cung cấp dịch vụ thanh toán
+Payment Service Provider (PSP)
+thông báo kết quả giao dịch
+cho đơn vị sử dụng dịch vụ thanh toán
+Payment Service Consumer (PSC).
+Sau khi khách hàng thanh toán xong, mạng có thể bị rớt
+hoặc họ có thể vô tình đóng trình duyệt trước khi được chuyển hướng
+về lại trang web     (Return URL).
+IPN đảm bảo rằng server
+vẫn sẽ nhận được kết quả cuối cùng một cách độc lập để cập nhật trạng thái đơn hàng.
+
+
+
+
 
 <!-- Xử lý thanh toán trùng lặp.... -->
 
