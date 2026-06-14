@@ -1,5 +1,11 @@
 # Dịch vụ văn bản (document service)
 
+![alt text](image-1.png)
+
+![alt text](image.png)
+
+
+
 x: Nhận thông tin sự kiện thanh toán thành công kafka
 
 Chức năng này chỉ dành cho người dùng VIP

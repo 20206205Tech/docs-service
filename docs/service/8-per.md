@@ -1,5 +1,9 @@
 # Dịch vụ nhân vật (persona service)
 
+![alt text](image-2.png)
+
+
+
 chịu trách nhiệm quản lý hệ thống nhân vật, kho giọng đọc (Voices), các nền tảng tổng hợp giọng nói (TTS Engines), và xử lý trực tiếp các yêu cầu chuyển đổi văn bản thành âm thanh (Text-to-Speech).
 
 ### 1. Quản lý Nhân vật ảo
