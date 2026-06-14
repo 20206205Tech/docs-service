@@ -1,5 +1,22 @@
 # Dịch vụ văn bản (document service)
 
+
+
+Sơ đồ tổng quan về Dịch vụ    văn bản (document service)
+
+```mermaid
+kafka=> event=> doc1=>database postgres
+
+client => doc1=>r2,database postgres
+
+doc1=> Celery +  RabbitMQ => doc2
+
+doc2=>r2,database postgres
+
+```
+
+
+
 Mục đích:
 tiếp nhận, lưu trữ và quản lý luồng xử lý tài liệu
 của người dùng.
@@ -11,6 +28,15 @@ và vector hóa tài liệu.
 
 ![alt text](images/document-swagger.png)
 
+
+Dịch vụ văn bản (document service) sử dụng  docling để trích xuất thông tin file của người dùng.
+Vì chức năng tải lên file  tài liệu chỉ dành
+cho người dùng có gói VIP, nên dịch vụ  văn bản (document service) cần
+lắng nghe sự kiện thanh toán thành công từ kafka
+Lưu lại  thông tin trong database   và
+Kiểm tra người dùng hiện tại có phải người dùng VIP.
+
+
 Tải lên tài liệu mới: người dùng gửi file tài liệu lên hệ thống. Sau khi tiếp nhận thành công, hệ thống sẽ trả về mã định danh duy nhất (doc_id), tên file gốc và trạng thái khởi tạo ban đầu để đưa vào hàng đợi xử lý.
 
 Dựa vào doc_id, người dùng có thể truy xuất trạng thái xử lý hiện tại của tài liệu.
@@ -21,25 +47,50 @@ Trong trường hợp quá trình bóc tách hoặc tóm tắt gặp sự cố, 
 
 <!-- Nếu từ cùng 1 người dùng tải lên 1 file => sao chép quá trình -->
 
-x: Nhận thông tin sự kiện thanh toán thành công kafka
 
-Chức năng này chỉ dành cho người dùng VIP
-x: Kiểm tra người dùng hiện tại có phải người dùng VIP?
 
-Chỉ cần tải lên file
+Dịch vụ văn bản (document service)
+có document worker
+nhận công việc từ Celery
+thông qua
+RabbitMQ
+thực hiện
+  hệ thống RAG
+xử lý tài liệu:
 
-Dùng cloudflare R2 lưu file người dùng
 
-Dùng docling để trích xuất thông tin file người dùng
 
-Công việc sau đó được xử lý ngầm:
 
-Tóm tắt nội dung file
 
-Vector hóa file với RAG và lưu vào qdrant
+Kéo file từ Cloudflare R2 và sử dụng docling để bóc tách văn bản.
 
-<!-- RabbitMQ -->
-<!-- Vẽ  Hướng dẫn Mermaid tạo sơ đồ  -->
+
+Sử dụng mô hình Cloudflare Workers AI  để tạo bản tóm tắt tiếng Việt.
+
+
+
+Chia nhỏ  (Chunking): Sử dụng RecursiveCharacterTextSplitter của LangChain
+
+Nhúng (Embedding): Tạo vector bằng mô hình keepitreal/vietnamese-sbert.
+
+
+
+
+Lưu trữ Vector:  Quản lý và lưu trữ các embedding vào Milvus để phục vụ truy xuất sau này.
+
+
+
+
+
+
+![alt text](images/document-milvus.png)
+
+
+
+
+
+
+
 
 ![alt text](images/r233333.png)
 

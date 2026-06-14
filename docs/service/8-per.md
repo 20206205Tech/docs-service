@@ -36,9 +36,9 @@ từ nhà cung cấp elevenlabs về hệ thống cơ sở dữ liệu.
 
 Cung cấp chức năng tạo ra âm thanh từ văn bản đầu vào với edge_tts và piper_tts.
 
-Với piper_tts cần file model được lưu tại R2 và được tải xuống khi bắt đầu khởi động dịch vụ
+Với piper_tts cần file mô hình  được lưu tại R2 và được tải xuống khi bắt đầu khởi động dịch vụ
 
-Dữ liệu file mẫu âm thanh audio, hình ảnh images, models được lưu tại R2
+Dữ liệu file mẫu âm thanh audio, hình ảnh images, mô hình  models được lưu tại R2
 
 ![alt text](images/r2per.png)
 
