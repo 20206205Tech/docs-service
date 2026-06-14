@@ -103,6 +103,12 @@ Cấu hình Adapter các LLM (Groq, Ollama và NVIDIA) có khả năng tool call
 Có công cụ lấy thông tin nhân vật và công cụ gọi LangGraph.
 Khả năng chuyển đổi giữa ElevenLabs, Edge TTS và Piper TTS đáp ứng linh hoạt theo cấu hình nhân vật.
 
+
+
+![alt text](voice-0.png)
+
+
+
 Các sự kiện LiveKit được hệ thống Voice Agent sử dụng trong dự án này:
 
 <!-- Sự kiện Phòng (Room Events) -->
