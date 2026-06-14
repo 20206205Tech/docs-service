@@ -1,20 +1,24 @@
 # Dịch vụ nhân vật (persona service)
 
-![alt text](images/r2per.png)
 
 
 
-chịu trách nhiệm quản lý hệ thống nhân vật, kho giọng đọc (Voices), các nền tảng tổng hợp giọng nói (TTS Engines), và xử lý trực tiếp các yêu cầu chuyển đổi văn bản thành âm thanh (Text-to-Speech).
+Mục đích:
+chịu trách nhiệm quản lý hệ thống nhân vật, kho giọng đọc (Voices), các nền tảng tổng hợp giọng nói (TTS Engines) và xử lý trực tiếp các yêu cầu chuyển đổi văn bản thành âm thanh (Text-to-Speech).
 
-### 1. Quản lý Nhân vật ảo
 
-- **Dành cho Người dùng (Public):**
-- **Truy xuất danh sách Persona:** Cung cấp danh sách các nhân vật ảo hiện có, hỗ trợ phân trang (`page`,`size`) và cho phép lọc theo mã giọng đọc (`voice_uuid`).
-- **Xem chi tiết Persona:** Lấy thông tin cụ thể của một nhân vật dựa trên định danh (`persona_id`), bao gồm tên, giới tính, mô tả, ảnh đại diện, và câu chào mẫu.
+<!-- Quản lý Nhân vật ảo -->
 
-- **Dành cho Quản trị viên (Persona Admin):**
-- **Quản lý vòng đời Persona:** Khởi tạo mới, cập nhật thông tin hoặc xóa bỏ các nhân vật ảo khỏi hệ thống.
-- **Quản lý Tài nguyên Truyền thông:** Cung cấp các API chuyên biệt để tải lên ảnh đại diện (`upload-avatar`) và tệp âm thanh câu chào mẫu (`upload-audio`) cho từng Persona.
+Truy xuất danh sách      nhân vật:           Cung cấp danh sách các nhân vật, hỗ trợ phân trang
+Xem chi tiết      nhân vật:           Lấy thông tin cụ thể của một nhân vật dựa trên định danh (`persona_id`), bao gồm tên, giới tính, mô tả, ảnh đại diện, và câu chào mẫu.
+
+
+
+
+
+- **Dành cho Quản trị viên (     nhân vật     Admin):**
+- **Quản lý vòng đời      nhân vật:           Khởi tạo mới, cập nhật thông tin hoặc xóa bỏ các nhân vật ảo khỏi hệ thống.
+- **Quản lý Tài nguyên Truyền thông:** Cung cấp các API chuyên biệt để tải lên ảnh đại diện (`upload-avatar`) và tệp âm thanh câu chào mẫu (`upload-audio`) cho từng      nhân vật    .
 
 ### 2. Quản lý Giọng đọc và Nền tảng (Voices & Engines)
 
@@ -46,3 +50,4 @@ Cung cấp khả năng tạo ra tệp âm thanh từ văn bản đầu vào:
 
 
 ![alt text](images/persona-database.png)
+![alt text](images/r2per.png)
