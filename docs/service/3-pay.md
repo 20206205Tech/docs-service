@@ -159,19 +159,19 @@ nhiều cổng thanh toán khác nhau.
 
 vnpay
 
-![alt text](images/image-15.png)
+![alt text](images/payment-vnpay.png)
 
 momo
 
-![alt text](images/image-16.png)
+![alt text](images/payment-momo.png)
 
 zalo
 
-![alt text](images/image-17.png)
+![alt text](images/payment-zalo.png)
 
 sepay
 
-![alt text](images/image-18.png)
+![alt text](images/payment-sepay.png)
 
 <!-- lý thuyết Đảo ngược phụ thuộc (Dependency Inversion) -->
 
@@ -179,4 +179,4 @@ sepay
 <!-- Mã giảm giá khó chưa làm  -->
 <!-- 6: Đang thiếu phần hóa đơn (Để sau) -->
 
-![alt text](images/image-20.png)
+![alt text](images/payment-mail.png)

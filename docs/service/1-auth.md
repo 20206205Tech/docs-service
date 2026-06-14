@@ -149,7 +149,7 @@ Cấu hình Hệ thống Email (SMTP) đang để mặc định là Gmail
 
 Ghi đè các mẫu email HTML cho "Xác nhận tài khoản" và "Đặt lại mật khẩu" để đồng nhất email thương hiệu tương tự như trong thanh toán.
 
-![alt text](images/image-19.png)
+![alt text](images/auth-mail.png)
 
 ![alt text](images/auth-terraform-supabase-diagram.png)
 
