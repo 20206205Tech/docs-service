@@ -2,23 +2,23 @@
 ![alt text](image-3.png)
 
 
-![alt text](conversation-lint.png)
+![alt text](images/conversation-lint.png)
 
 
-![alt text](conversation-swagger.png)
-![alt text](conversation-PR.png)
-![alt text](conversation-database.png)
+![alt text](images/conversation-swagger.png)
+![alt text](images/conversation-PR.png)
+![alt text](images/conversation-database.png)
 
 
 
-![alt text](conversation-database-migration.png)
+![alt text](images/conversation-database-migration.png)
 
 
 
 ![alt text](images/chatbot-swagger.png)
-![alt text](chatbot-database.png)
+![alt text](images/chatbot-database.png)
 
-![alt text](chatbot-database-migration.png)
+![alt text](images/chatbot-database-migration.png)
 
 
 <!-- Chưa cần vì hết chức năng -->
