@@ -40,7 +40,6 @@ Cung cấp khả năng tạo ra tệp âm thanh từ văn bản đầu vào:
 
 
 
-
 ![alt text](images/persona-database-migration.png)
 
 
