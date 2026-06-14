@@ -1,36 +1,42 @@
+
 flowchart TB
     %% Khai báo các class styles
     classDef support fill:#f3e5f5,stroke:#9c27b0,stroke-width:2px,color:#000
     classDef infra fill:#eceff1,stroke:#607d8b,stroke-width:2px,color:#37474f
     classDef db fill:#ffebee,stroke:#d32f2f,stroke-width:2px,color:#c62828
     classDef brokerStyle fill:#ffe0b2,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef ai fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
 
     %% Shared Infrastructure
-    %% subgraph SharedInfra [Shared Infrastructure]
-        Broker[["Kafka Broker (Event Bus)"]]:::brokerStyle
-        Postgres[("PostgreSQL (Application DB)")]:::db
-        R2[("Cloudflare R2 (Object Storage)")]:::db
-        Milvus[("Milvus (Vector DB)")]:::db
-    %% end
+    Broker[["Kafka Broker (Event Bus)"]]:::brokerStyle
+    CloudflareAI(["Cloudflare Workers AI"]):::ai
+    Postgres[("PostgreSQL (Application DB)")]:::db
+    R2[("Cloudflare R2 (Object Storage)")]:::db
+    Milvus[("Milvus (Vector DB)")]:::db
 
     %% Subdomains
-    %% subgraph SupportDomain [Document Subdomain]
-        DocumentService["Document Service (FastAPI)"]:::support
-        DocumentWorker["Document Worker (Celery)"]:::support
-        RabbitMQ[["RabbitMQ (Task Queue)"]]:::infra
+    DocumentService["Document Service (FastAPI)"]:::support
+    DocumentWorker["Document Worker (Celery)"]:::support
+    RabbitMQ[["RabbitMQ (Task Queue)"]]:::infra
 
-        %% Luồng nội bộ của Document Subdomain
-        DocumentService -->|"Gửi tác vụ bất đồng bộ"| RabbitMQ
-        RabbitMQ -->|"Nhận tác vụ xử lý"| DocumentWorker
-    %% end
+    %% Luồng nội bộ của Document Subdomain
+    DocumentService -->|"Gửi tác vụ bất đồng bộ"| RabbitMQ
+    RabbitMQ -->|"Nhận tác vụ xử lý"| DocumentWorker
 
     %% Event Broker
     Broker -.->|"Consume: payment_success \n(Cập nhật VIP subscription)"| DocumentService
 
+
+
     %% Giao tiếp CSDL & Storage của Document Domain
     DocumentService -->|"Đọc/Ghi dữ liệu người dùng"| Postgres
-    DocumentService -->|"Tải lên file / Đọc Presigned URL"| R2
-
     DocumentWorker -->|"Cập nhật trạng thái xử lý"| Postgres
+
+
+    DocumentService -->|"Tải lên file / Đọc Presigned URL"| R2
     DocumentWorker -->|"Đọc file thô / Lưu Content & Summary"| R2
+
+    DocumentWorker -->|"Gửi Text / Nhận Summary"| CloudflareAI
     DocumentWorker -->|"Đồng bộ Vector Embeddings"| Milvus
+
+    %% Tích hợp AI
