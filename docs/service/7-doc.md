@@ -20,11 +20,13 @@ Vector hóa file với RAG và lưu vào qdrant
 <!-- RabbitMQ -->
 <!-- Vẽ  Hướng dẫn Mermaid tạo sơ đồ  -->
 
-![alt text](images/image.png)
 
-![alt text](images/image-1.png)
 
-![alt text](images/image-2.png)
+![alt text](images/document-swagger.png)
+![alt text](images/document-database-migration.png)
+
+
+![alt text](images/document-database.png)
 
 ## Báo Cáo Mô Tả Chức Năng Microservice: Code Document Service
 
