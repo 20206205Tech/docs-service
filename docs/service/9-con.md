@@ -74,7 +74,7 @@ Cấu hình Adapter các LLM (Groq, Ollama và NVIDIA) có khả năng tool call
 Có công cụ lấy thông tin nhân vật và công cụ gọi LangGraph.
 Khả năng chuyển đổi giữa ElevenLabs, Edge TTS và Piper TTS đáp ứng linh hoạt theo cấu hình nhân vật.
 
-![alt text](voice-livekit-overview.png)
+![alt text](images/voice-livekit-overview.png)
 
 Các sự kiện LiveKit được hệ thống Voice Agent sử dụng trong dự án này:
 
@@ -122,18 +122,18 @@ Theo dõi trạng thái thay đổi của AI và User.
 
 function_tools_executed: Kích hoạt khi AI quyết định gọi một công cụ bên ngoài (Function Calling).
 
-![alt text](voice-clean_transcript.png)
+![alt text](images/voice-clean_transcript.png)
 
 ![alt text](images/r2chat.png)
 
 <!-- Nhà phát triển gửi thông tin văn bản mà không cần nói âm thanh -->
 
-![alt text](voice-developer-send-text.png)
+![alt text](images/voice-developer-send-text.png)
 
 <!-- AI dùng  công cụ lấy thông tin nhân vật -->
 
-![alt text](voice-get-persona-ui.png)
+![alt text](images/voice-get-persona-ui.png)
 
 <!-- Thông tin terminal về AI dùng  công cụ lấy thông tin nhân vật -->
 
-![alt text](voice-get-persona-terminal.png)
+![alt text](images/voice-get-persona-terminal.png)
