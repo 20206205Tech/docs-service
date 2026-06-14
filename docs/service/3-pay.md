@@ -112,6 +112,13 @@ Payment Service Provider (PSP)
 thông báo kết quả giao dịch
 cho đơn vị sử dụng dịch vụ thanh toán
 Payment Service Consumer (PSC).
+
+
+
+
+![alt text](payment-ipn-i1.png)
+
+
 Sau khi khách hàng thanh toán xong, mạng có thể bị rớt
 hoặc họ có thể vô tình đóng trình duyệt trước khi được chuyển hướng
 về lại trang web     (Return URL).
@@ -119,6 +126,7 @@ IPN đảm bảo rằng server
 vẫn sẽ nhận được kết quả cuối cùng một cách độc lập để cập nhật trạng thái đơn hàng.
 
 
+![alt text](payment-ipn-i2.png)
 
 
 
