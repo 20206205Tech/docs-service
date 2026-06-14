@@ -15,7 +15,6 @@ và vector hóa tài liệu.
 
 ![alt text](images/document-swagger.png)
 
-Dịch vụ văn bản (document service) sử dụng docling để trích xuất thông tin file của người dùng.
 Vì chức năng tải lên file tài liệu chỉ dành
 cho người dùng có gói VIP, nên dịch vụ văn bản (document service) cần
 lắng nghe sự kiện thanh toán thành công từ kafka
