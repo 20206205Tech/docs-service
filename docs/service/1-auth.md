@@ -13,7 +13,7 @@ Do đó, bảng profiles lưu trữ thông tin người dùng cập nhật.
 
 Mô tả chi tiết các chức năng:
 
-## I. Xác thực & Quản lý tài khoản
+## I. Xác thực và  Quản lý tài khoản
 
 Hệ thống sử dụng các API Auth của Supabase để xử lý toàn bộ luồng đăng nhập, đăng ký và bảo mật tài khoản:
 
