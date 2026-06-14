@@ -2,12 +2,7 @@
 
 Sơ đồ tổng quan về Dịch vụ thanh toán (payment service)
 
-
-
 ![alt text](images/payment-kafka-event.png)
-
-
-
 
 Mục đích:
 Dịch vụ thanh toán (payment service)
@@ -56,8 +51,6 @@ Xử lý Return URL: Cung cấp các endpoint (nhận cả GET và POST ) để 
 
 Các API chính trong tài liệu swagger API Dịch vụ thanh toán (payment service)
 
-
-
 ![alt text](images/payment-swagger.png)
 
 Trong quá trình phát triển đồ án, em tìm kiếm dịch vụ cung cấp sẵn về thanh toán
@@ -78,36 +71,17 @@ Thông tin kiểm tra tự động của Pull Request trên GitHub
 
 ![alt text](images/payment-PR.png)
 
-
-
 Các bước CI/CD tự động test trên github action
 
 ![alt text](images/payment-test.png)
-
-
 
 Quản lý các di chuyển cơ sở dữ liệu trong github action
 
 ![alt text](images/payment-database-migration.png)
 
-
-
 Các bảng có trong cơ sở dữ liệu của Dịch vụ thanh toán (payment service)
 
-
-
-
 ![alt text](images/payment-database.png)
-
-
-
-
-
-
-
-
-
-
 
 Instant Payment Notification
 (IPN)
@@ -118,22 +92,15 @@ thông báo kết quả giao dịch
 cho đơn vị sử dụng dịch vụ thanh toán
 Payment Service Consumer (PSC).
 
-
-
-
 ![alt text](images/payment-ipn-i1.png)
-
 
 Sau khi khách hàng thanh toán xong, mạng có thể bị rớt
 hoặc họ có thể vô tình đóng trình duyệt trước khi được chuyển hướng
-về lại trang web     (Return URL).
+về lại trang web (Return URL).
 IPN đảm bảo rằng server
 vẫn sẽ nhận được kết quả cuối cùng một cách độc lập để cập nhật trạng thái đơn hàng.
 
-
 ![alt text](images/payment-ipn-i2.png)
-
-
 
 <!-- Xử lý thanh toán trùng lặp.... -->
 
