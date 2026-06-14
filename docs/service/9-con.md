@@ -1,4 +1,15 @@
 # Dịch vụ trò chuyện (conversation service) và Dịch vụ chatbot (chatbot service)
+
+
+
+Sơ đồ tổng quan về Dịch vụ trò chuyện (conversation service) và Dịch vụ chatbot (chatbot service)
+
+![alt text](images/conversation-and-chatbot-overview.png)
+
+
+
+
+
 ![alt text](images/r2chat.png)
 
 

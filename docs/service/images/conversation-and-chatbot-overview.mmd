@@ -1,0 +1,52 @@
+
+
+
+flowchart TD
+classDef nestColor fill:#e1f5fe,stroke:#03a9f4,stroke-width:2px,color:#000
+classDef fastapiColor fill:#f3e5f5,stroke:#9c27b0,stroke-width:2px,color:#000
+classDef dbColor fill:#ffebee,stroke:#d32f2f,stroke-width:2px,color:#c62828
+classDef vdbColor fill:#e8f5e9,stroke:#4caf50,stroke-width:2px,color:#000
+classDef thirdPartyColor fill:#fffde7,stroke:#fbc02d,stroke-width:2px,color:#000
+classDef queueColor fill:#ffe0b2,stroke:#f57c00,stroke-width:2px,color:#e65100
+
+
+R2Storage[(Cloudflare R2 Storage)]:::db
+
+subgraph VectorDBs [Vector Database]
+Milvus[(Milvus DB)]:::vdb
+Pinecone[(Pinecone)]:::vdb
+Qdrant[(Qdrant)]:::vdb
+end
+
+Kafka[["Kafka Broker"]]:::queueColor
+Livekit[["LiveKit Server"]]:::thirdPartyColor
+PersonaService["Persona Service"]:::fastapiColor
+
+ConvService["Conversation Service"]:::nestColor
+ChatbotService["Chatbot Service"]:::fastapiColor
+
+RabbitMQ[["RabbitMQ Broker"]]:::queueColor
+
+
+
+Kafka -->|"Event: payment_success"| ConvService
+ConvService <-->|"gRPC (text)"| ChatbotService
+
+
+
+ConvService -->|"Publish: chat_deletions & share_events"| RabbitMQ
+
+
+
+ConvService -->|"Cấp Token JWT cho Client"| Livekit
+ChatbotService -->|"REST API cấu hình nhân vật"| PersonaService
+ChatbotService <-->|"LiveKit Agent kết nối voice"| Livekit
+
+ChatbotService -->|"User Documents"| Milvus
+ChatbotService -->|"VBPL"| Pinecone
+ChatbotService -->|"Pháp Điển"| Qdrant
+
+
+
+RabbitMQ -->|"Consume & Xử lý sự kiện"| ChatbotService
+ChatbotService -->|"Tải lên/Xóa file chia sẻ"| R2Storage
