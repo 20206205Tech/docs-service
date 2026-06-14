@@ -26,8 +26,19 @@ Cung cấp khả năng tạo ra tệp âm thanh từ văn bản đầu vào:
 - **Tạo giọng nói API (Generate Speech):** Cho phép các hệ thống/ứng dụng khác gọi API để tạo tệp âm thanh (hỗ trợ các định dạng như mp3, wav, ogg) hoặc truyền phát (stream). API này cho phép tùy chỉnh văn bản, model, mã giọng đọc và tốc độ đọc.
 - **Công cụ Kiểm thử cho Admin (Admin Generate Audio):** API dành riêng cho quản trị viên để nhập văn bản và tạo âm thanh. Cung cấp tham số `is_download` cho phép quản trị viên lựa chọn nghe thử trực tiếp trên trình duyệt hoặc tải file âm thanh về máy.
 
-![alt text](images/image-3.png)
 
-![alt text](images/image-4.png)
 
-![alt text](images/image-5.png)
+![alt text](images/persona-swagger.png)
+
+
+
+
+![alt text](images/persona-database-migration.png)
+
+
+
+
+
+
+
+![alt text](images/persona-database.png)
