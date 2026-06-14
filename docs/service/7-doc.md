@@ -1,8 +1,8 @@
 # Dịch vụ văn bản (document service)
 
-![alt text](image-1.png)
+![alt text](images/r233333.png)
 
-![alt text](image.png)
+![alt text](images/r2summmmmm.png)
 
 
 

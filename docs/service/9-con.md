@@ -1,5 +1,5 @@
 # Dịch vụ trò chuyện (conversation service) và Dịch vụ chatbot (chatbot service)
-![alt text](image-3.png)
+![alt text](images/r2chat.png)
 
 
 ![alt text](images/conversation-lint.png)

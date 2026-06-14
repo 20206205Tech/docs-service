@@ -1,6 +1,6 @@
 # Dịch vụ nhân vật (persona service)
 
-![alt text](image-2.png)
+![alt text](images/r2per.png)
 
 
 
