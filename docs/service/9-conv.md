@@ -1,20 +1,25 @@
 # Dịch vụ trò chuyện (conversation service) và Dịch vụ chatbot (chatbot service)
 
-![alt text](images/image-13.png)
 
-![alt text](images/image-8.png)
 
-![alt text](images/image-6.png)
+![alt text](conversation-lint.png)
 
-![alt text](images/image-9.png)
 
-![alt text](images/image-7.png)
+![alt text](conversation-swagger.png)
+![alt text](conversation-PR.png)
+![alt text](conversation-database.png)
 
-![alt text](images/image-10.png)
 
-![alt text](images/image-11.png)
 
-![alt text](images/image-12.png)
+![alt text](conversation-database-migration.png)
+
+
+
+![alt text](images/chatbot-swagger.png)
+![alt text](chatbot-database.png)
+
+![alt text](chatbot-database-migration.png)
+
 
 <!-- Chưa cần vì hết chức năng -->
 <!-- x: Nhận thông tin sự kiện thanh toán thành công kafka -->
