@@ -4,16 +4,9 @@
 
 Sơ đồ tổng quan về Dịch vụ    văn bản (document service)
 
-```mermaid
-kafka=> event=> doc1=>database postgres
 
-client => doc1=>r2,database postgres
 
-doc1=> Celery +  RabbitMQ => doc2
-
-doc2=>r2,database postgres
-
-```
+![alt text](images/document-overview.png)
 
 
 
