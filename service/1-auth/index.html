@@ -1,0 +1,968 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Tài liệu dự án">
+      
+      
+        <meta name="author" content="Vũ Văn Nghĩa">
+      
+      
+      
+        <link rel="prev" href="../0-all/">
+      
+      
+        <link rel="next" href="../2-set/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Dịch vụ xác thực (auth service - dùng supabase) - Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dich-vu-xac-thuc-auth-service-dung-supabase" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Documentation" class="md-header__button md-logo" aria-label="Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Dịch vụ xác thực (auth service - dùng supabase)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Chuyển sang chế độ tối"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Chuyển sang chế độ tối" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Chuyển sang chế độ sáng"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Chuyển sang chế độ sáng" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Service
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Service
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0-all/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tổng quan các Microservice của hệ thống
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dịch vụ xác thực (auth service - dùng supabase)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dịch vụ xác thực (auth service - dùng supabase)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#i-xac-thuc-va-quan-ly-tai-khoan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I. Xác thực và Quản lý tài khoản
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-xac-thuc-2-yeu-to" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        II. Xác thực 2 yếu tố
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-quan-ly-ho-so-nguoi-dung-supabase-co-so-du-lieu-postgrest-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        III. Quản lý Hồ sơ người dùng (Supabase cơ sở dữ liệu - PostgREST API)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iv-quan-ly-anh-ai-dien-supabase-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IV. Quản lý Ảnh đại diện (Supabase Storage)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cau-hinh-trong-kong-api-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cấu hình trong Kong API Gateway
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2-set/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dịch vụ cài đặt (setting service - dùng neon API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3-pay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dịch vụ thanh toán (payment service)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7-doc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dịch vụ văn bản (document service)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8-per/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dịch vụ nhân vật (persona service)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../9-con/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dịch vụ trò chuyện (conversation service) và Dịch vụ chatbot (chatbot service)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#i-xac-thuc-va-quan-ly-tai-khoan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I. Xác thực và Quản lý tài khoản
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-xac-thuc-2-yeu-to" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        II. Xác thực 2 yếu tố
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-quan-ly-ho-so-nguoi-dung-supabase-co-so-du-lieu-postgrest-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        III. Quản lý Hồ sơ người dùng (Supabase cơ sở dữ liệu - PostgREST API)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iv-quan-ly-anh-ai-dien-supabase-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IV. Quản lý Ảnh đại diện (Supabase Storage)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cau-hinh-trong-kong-api-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cấu hình trong Kong API Gateway
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dich-vu-xac-thuc-auth-service-dung-supabase">Dịch vụ xác thực (auth service - dùng supabase)</h1>
+<p>Hệ thống sử dụng supabase
+để xử lý các nhóm chức năng chính
+bao gồm:
+xác thực và phân quyền, xác thực 2 yếu tố, quản lý dữ liệu người dùng
+và quản lý tệp tin
+(lưu trữ các file ảnh đại diện do người dùng tải lên
+tại
+bucket avavtars).
+Do mỗi lần user đăng nhập lại, Supabase/Google sẽ ghi đè lại thông tin gốc.
+Do đó, bảng profiles lưu trữ thông tin người dùng cập nhật.</p>
+<p>Mô tả chi tiết các chức năng:</p>
+<h2 id="i-xac-thuc-va-quan-ly-tai-khoan">I. Xác thực và  Quản lý tài khoản</h2>
+<p>Hệ thống sử dụng các API Auth của Supabase để xử lý toàn bộ luồng đăng nhập, đăng ký và bảo mật tài khoản:</p>
+<ul>
+<li>Đăng nhập bằng Google:</li>
+<li>Tạo URL và chuyển hướng người dùng đến trang ủy quyền của Google thông qua Supabase Auth Provider.</li>
+<li>
+<p>Endpoint sử dụng : /auth/v1/authorize?provider=google&amp;redirect_to={redirectUrl}</p>
+</li>
+<li>
+<p>Đăng nhập bằng Email và Mật khẩu:</p>
+</li>
+<li>Cho phép người dùng đăng nhập bằng tài khoản email. Trả về thông tin Access Token và Refresh Token nếu thành công.</li>
+<li>
+<p>Endpoint sử dụng : /auth/v1/token?grant_type=password</p>
+</li>
+<li>
+<p>Đăng ký tài khoản mới:</p>
+</li>
+<li>Tạo tài khoản mới bằng Email và Mật khẩu, hỗ trợ gửi email xác nhận tài khoản thông qua đường dẫn chuyển hướng sau khi kích hoạt thành công ( redirect_to ).</li>
+<li>
+<p>Endpoint sử dụng : /auth/v1/signup</p>
+</li>
+<li>
+<p>Khôi phục mật khẩu:</p>
+</li>
+<li>Gửi yêu cầu khôi phục mật khẩu tới email của người dùng. Hệ thống sẽ gửi một email chứa liên kết để xác thực và chuyển hướng người dùng về trang đổi mật khẩu.</li>
+<li>
+<p>Endpoint sử dụng : /auth/v1/recover</p>
+</li>
+<li>
+<p>Cập nhật mật khẩu mới:</p>
+</li>
+<li>Cho phép người dùng đổi mật khẩu mới sau khi đã đăng nhập (hoặc sau khi click vào liên kết khôi phục mật khẩu).</li>
+<li>
+<p>Endpoint sử dụng : /auth/v1/user</p>
+</li>
+<li>
+<p>Làm mới Access Token:</p>
+</li>
+<li>Sử dụng refresh_token để lấy một access_token mới khi token cũ hết hạn mà không bắt người dùng phải đăng nhập lại.</li>
+<li>
+<p>Endpoint sử dụng : /auth/v1/token?grant_type=refresh_token</p>
+</li>
+<li>
+<p>Đăng xuất:</p>
+</li>
+<li>Hủy phiên làm việc hiện tại của người dùng trên hệ thống Supabase.</li>
+<li>Endpoint sử dụng : /auth/v1/logout</li>
+</ul>
+<h2 id="ii-xac-thuc-2-yeu-to">II. Xác thực 2 yếu tố</h2>
+<p>Hệ thống hỗ trợ phương thức xác thực hai yếu tố TOTP (Time-based One-Time Password - như Google Authenticator hay Authy) bằng các API nâng cao của Supabase:</p>
+<ul>
+<li>Đăng ký thiết bị xác thực MFA mới:</li>
+<li>Khởi tạo quá trình liên kết thiết bị xác thực mới. API trả về mã QR ( qr_code ), mã bí mật ( secret ), và chuỗi URI để người dùng quét trên ứng dụng Authenticator.</li>
+<li>
+<p>Endpoint sử dụng : /auth/v1/factors</p>
+</li>
+<li>
+<p>Tạo thử thách xác thực:</p>
+</li>
+<li>Tạo một thử thách xác thực (challenge) dựa trên ID thiết bị MFA ( factorId ) để chuẩn bị so khớp với mã TOTP người dùng nhập.</li>
+<li>
+<p>Endpoint sử dụng : /auth/v1/factors/{factorId}/challenge</p>
+</li>
+<li>
+<p>Xác thực mã TOTP:</p>
+</li>
+<li>Kiểm tra mã TOTP gồm 6 chữ số người dùng nhập có khớp với thử thách hiện tại không. Nếu đúng, Supabase sẽ nâng cấp phiên đăng nhập (tăng cấp bảo mật cho Access Token).</li>
+<li>
+<p>Endpoint sử dụng : /auth/v1/factors/{factorId}/verify</p>
+</li>
+<li>
+<p>Lấy danh sách các yếu tố MFA:</p>
+</li>
+<li>Lấy thông tin tài khoản người dùng để lọc ra danh sách các thiết bị/yếu tố xác thực đã liên kết, phân loại thành: tất cả thiết bị ( all ) và các thiết bị đã kích hoạt thành công ( active ).</li>
+<li>
+<p>Endpoint sử dụng : /auth/v1/user</p>
+</li>
+<li>
+<p>Hủy liên kết/Xóa thiết bị MFA:</p>
+</li>
+<li>Xóa một thiết bị xác thực MFA khỏi tài khoản người dùng.</li>
+<li>
+<p>Endpoint sử dụng : /auth/v1/factors/{factorId}</p>
+</li>
+<li>
+<p>Cập nhật tên hiển thị của thiết bị MFA:</p>
+</li>
+<li>Đổi tên hiển thị ( friendly_name ) của thiết bị xác thực (ví dụ: "Điện thoại cá nhân").</li>
+<li>Endpoint sử dụng : /auth/v1/factors/{factorId}</li>
+</ul>
+<h2 id="iii-quan-ly-ho-so-nguoi-dung-supabase-co-so-du-lieu-postgrest-api">III. Quản lý Hồ sơ người dùng (Supabase cơ sở dữ liệu - PostgREST API)</h2>
+<p>Hệ thống sử dụng cơ chế RESTful API tự động sinh từ PostgreSQL của Supabase (PostgREST) để thực hiện các thao tác CRUD trên bảng cơ sở dữ liệu profiles :</p>
+<ul>
+<li>Lấy thông tin hồ sơ:</li>
+<li>Truy vấn thông tin chi tiết hồ sơ người dùng (như tên đầy đủ, ảnh đại diện) từ bảng profiles dựa vào userId .</li>
+<li>
+<p>Endpoint sử dụng : /rest/v1/profiles?id=eq.{userId}</p>
+</li>
+<li>
+<p>Cập nhật thông tin hồ sơ:</p>
+</li>
+<li>Cập nhật các trường thông tin hồ sơ như tên hiển thị ( full_name ) hoặc đường dẫn ảnh đại diện ( avatar_url ).</li>
+<li>Endpoint sử dụng : /rest/v1/profiles?id=eq.{userId}</li>
+</ul>
+<h2 id="iv-quan-ly-anh-ai-dien-supabase-storage">IV. Quản lý Ảnh đại diện (Supabase Storage)</h2>
+<p>Hệ thống sử dụng dịch vụ lưu trữ tệp (Storage) của Supabase để quản lý hình ảnh của người dùng:</p>
+<ul>
+<li>Tải lên ảnh đại diện:</li>
+<li>Tải tệp tin ảnh của người dùng lên thư mục avatars trên Supabase Storage. Tên tệp được sinh ngẫu nhiên kết hợp với userId để tránh trùng lặp.</li>
+<li>Endpoint tải lên : /storage/v1/object/avatars/{fileName}</li>
+<li>Đường dẫn công khai nhận về : /storage/v1/object/public/avatars/{fileName}</li>
+</ul>
+<p>Thông tin payload của JWT từ supabase</p>
+<p><img alt="alt text" src="../images/auth-jwt-supabase.png" /></p>
+<p>Tham khảo tài liệu của supabase
+tại
+https://supabase.com/docs/guides/auth/auth-mfa/totp
+Trang tài liệu này hướng dẫn cách triển khai tính năng Xác thực Đa Yếu Tố (MFA) bằng ứng dụng Authenticator (TOTP) trong Supabase.
+Tính năng này hiện được cung cấp miễn phí và bật mặc định cho mọi dự án Supabase.
+Nội dung chính xoay quanh hai luồng hoạt động cơ bản:</p>
+<!-- Quy trình đăng ký yếu tố bảo mật (Enrollment Flow) -->
+
+<p>Khởi tạo quá trình đăng ký.</p>
+<p>Hệ thống sẽ trả về một mã QR và một chuỗi mã bí mật.</p>
+<p>Người dùng sẽ dùng ứng dụng xác thực (như Google Authenticator) để quét mã QR này.</p>
+<p>Chuẩn bị hệ thống để tiếp nhận mã xác minh, đồng thời trả về một challenge ID.</p>
+<p>Đối chiếu mã 6 chữ số mà người dùng nhập vào từ ứng dụng xác thực.</p>
+<p>Nếu mã hợp lệ, yếu tố bảo mật MFA này sẽ chính thức được kích hoạt cho tài khoản.</p>
+<!-- Quy trình kiểm tra khi đăng nhập (Challenge Flow) -->
+
+<p>Trích xuất danh sách các yếu tố MFA đã được người dùng đăng ký để lấy factorId.</p>
+<p>Khi đã có factorId, ứng dụng tiếp tục gọi challenge() để mở phiên thử thách.</p>
+<p>Dùng verify() cùng với mã OTP người dùng nhập vào để hoàn tất đăng nhập và nâng cấp phiên làm việc lên aal2.</p>
+<p><img alt="alt text" src="../images/auth-mfa-flow.svg" /></p>
+<p>Chi tiết về cấu hình terraform dùng để quản lý hạ tầng Supabase.</p>
+<p><img alt="alt text" src="../images/auth-terraform-supabase-overview.png" /></p>
+<p>Sử dụng Terraform Cloud với workspace infra-supabase để lưu trữ và quản lý trạng thái hạ tầng một cách tập trung.</p>
+<p>Tự động tạo các dự án cho dev và prod dựa trên project_names</p>
+<p>Cấu hình mã vùng (region) là ap-southeast-1 tại Singapore. Đối với việc triển khai hệ thống hướng tới người dùng tại Việt Nam.</p>
+<p>Bỏ qua sự thay đổi của mật khẩu tránh việc Terraform muốn thay đổi mật khẩu cơ sở dữ liệu mỗi lần chạy.</p>
+<p>Tích hợp đăng nhập qua Google OAuth (Client ID và Client Secret)</p>
+<p>Thiết lập giới hạn gửi email (rate limit)</p>
+<p>Cấu hình Hệ thống Email (SMTP) đang để mặc định là Gmail</p>
+<p>Ghi đè các mẫu email HTML cho "Xác nhận tài khoản" và "Đặt lại mật khẩu" để đồng nhất email thương hiệu tương tự như trong thanh toán.</p>
+<p><img alt="alt text" src="../images/auth-mail.png" /></p>
+<p><img alt="alt text" src="../images/auth-terraform-supabase-diagram.png" /></p>
+<p>Chi tiết về cấu hình di chuyển cơ sở dữ liệu supabase</p>
+<p>Sử dụng supabase CLI tạo dự án quản lý di chuyển cơ sở dữ liệu bằng lệnh npx supabase init</p>
+<p>Trong thư mục di chuyển cơ sở dữ liệu có các file quản lý kết hợp với Bảo mật cấp hàng RLS (Row-Level Security)</p>
+<!-- Tạo bảng admin_whitelist  lưu thông tin email admin -->
+
+<!-- Tạo bucket avatars  lưu thông tin file ảnh đại diện người dùng -->
+<!-- Tạo bảng profiles  lưu thông tin của người dùng -->
+
+<!-- Tạo bucket persona_avatars  lưu thông tin file ảnh đại diện nhân vật -->
+<!-- Tạo bucket persona_audios  lưu thông tin file  âm thanh lời chào nhân vật  -->
+
+<p>Kết quả bucket trên supabase</p>
+<p><img alt="alt text" src="../images/auth-supabase-bucket.png" /></p>
+<p>Kết quả cơ sở dữ liệu trên supabase</p>
+<p><img alt="alt text" src="../images/auth-supabase-database.png" /></p>
+<p>Để các dịch vụ khác dễ dàng phát triển, em tạo các gói thư viện dùng chung để các dịch vụ sử dụng
+và dễ quản lý, dễ thay đổi</p>
+<p>Hiện tại trong đồ án này, em có tạo 2 gói dành cho NestJS trên npm (20206205tech-nestjs-auth) và FastAPI trong python (20206205tech-python-auth) với các bước kiểm tra:</p>
+<p><img alt="alt text" src="../images/nest-auth.png" /></p>
+<!-- Kiểm tra về  Request-Id  từ Kong API Gateway  -->
+<!-- Kiểm tra về  Request-Kong-Secret  từ Kong API Gateway  -->
+<!-- Kiểm tra về  chữ ký JWT  của người dùng với supabase -->
+<!-- Kiểm tra về  MFA  (yêu cầu bắt buộc) đảm bảo bảo mật dữ liệu   -->
+<!-- Kiểm tra về  vai trò người dùng với những API bảo vệ với vai trò quản trị viên ADMIN   -->
+
+<h2 id="cau-hinh-trong-kong-api-gateway">Cấu hình trong Kong API Gateway</h2>
+<p>Tạo services trỏ về URL của dự án Supabase (https://[PROJECT_REF].supabase.co)</p>
+<p>Thiết lập Route: Tạo một Route liên kết với Service vừa tạo. Tham số strip_path=true đảm bảo Kong sẽ xóa tiền tố khỏi URI trước khi chuyển tiếp request đến Supabase.</p>
+<p>Dùng plugin request-transformer để tự động thêm apikey vào header trước khi gửi đến Supabase</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../0-all/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Tổng quan các Microservice của hệ thống">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Tổng quan các Microservice của hệ thống
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../2-set/" class="md-footer__link md-footer__link--next" aria-label="Next: Dịch vụ cài đặt (setting service - dùng neon API)">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Dịch vụ cài đặt (setting service - dùng neon API)
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.footer", "navigation.keyboard"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
