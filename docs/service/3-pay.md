@@ -76,8 +76,7 @@ Triển khai Dịch vụ thanh toán (payment service) độc lập tại heroku
 
 Thông tin kiểm tra tự động của Pull Request trên GitHub
 
-
-![alt text](images/image-14.png)
+![alt text](images/payment-PR.png)
 
 Các bước CI/CD tự động test trên github action
 
@@ -85,9 +84,9 @@ Các bước CI/CD tự động test trên github action
 
 Quản lý các di chuyển cơ sở dữ liệu trong github action
 
-
-
 ![alt text](images/payment-database-migration.png)
+
+
 
 Các bảng có trong cơ sở dữ liệu của Dịch vụ thanh toán (payment service)
 
@@ -116,7 +115,7 @@ Payment Service Consumer (PSC).
 
 
 
-![alt text](payment-ipn-i1.png)
+![alt text](images/payment-ipn-i1.png)
 
 
 Sau khi khách hàng thanh toán xong, mạng có thể bị rớt
@@ -126,7 +125,7 @@ IPN đảm bảo rằng server
 vẫn sẽ nhận được kết quả cuối cùng một cách độc lập để cập nhật trạng thái đơn hàng.
 
 
-![alt text](payment-ipn-i2.png)
+![alt text](images/payment-ipn-i2.png)
 
 
 
