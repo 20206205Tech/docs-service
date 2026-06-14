@@ -1,14 +1,8 @@
 # Dịch vụ văn bản (document service)
 
-
-
-Sơ đồ tổng quan về Dịch vụ    văn bản (document service)
-
-
+Sơ đồ tổng quan về Dịch vụ văn bản (document service)
 
 ![alt text](images/document-overview.png)
-
-
 
 Mục đích:
 tiếp nhận, lưu trữ và quản lý luồng xử lý tài liệu
@@ -21,14 +15,12 @@ và vector hóa tài liệu.
 
 ![alt text](images/document-swagger.png)
 
-
-Dịch vụ văn bản (document service) sử dụng  docling để trích xuất thông tin file của người dùng.
-Vì chức năng tải lên file  tài liệu chỉ dành
-cho người dùng có gói VIP, nên dịch vụ  văn bản (document service) cần
+Dịch vụ văn bản (document service) sử dụng docling để trích xuất thông tin file của người dùng.
+Vì chức năng tải lên file tài liệu chỉ dành
+cho người dùng có gói VIP, nên dịch vụ văn bản (document service) cần
 lắng nghe sự kiện thanh toán thành công từ kafka
-Lưu lại  thông tin trong database   và
+Lưu lại thông tin trong database và
 Kiểm tra người dùng hiện tại có phải người dùng VIP.
-
 
 Tải lên tài liệu mới: người dùng gửi file tài liệu lên hệ thống. Sau khi tiếp nhận thành công, hệ thống sẽ trả về mã định danh duy nhất (doc_id), tên file gốc và trạng thái khởi tạo ban đầu để đưa vào hàng đợi xử lý.
 
@@ -40,50 +32,26 @@ Trong trường hợp quá trình bóc tách hoặc tóm tắt gặp sự cố, 
 
 <!-- Nếu từ cùng 1 người dùng tải lên 1 file => sao chép quá trình -->
 
-
-
 Dịch vụ văn bản (document service)
 có document worker
 nhận công việc từ Celery
 thông qua
 RabbitMQ
 thực hiện
-  hệ thống RAG
+hệ thống RAG
 xử lý tài liệu:
-
-
-
-
 
 Kéo file từ Cloudflare R2 và sử dụng docling để bóc tách văn bản.
 
+Sử dụng mô hình Cloudflare Workers AI để tạo bản tóm tắt tiếng Việt.
 
-Sử dụng mô hình Cloudflare Workers AI  để tạo bản tóm tắt tiếng Việt.
-
-
-
-Chia nhỏ  (Chunking): Sử dụng RecursiveCharacterTextSplitter của LangChain
+Chia nhỏ (Chunking): Sử dụng RecursiveCharacterTextSplitter của LangChain
 
 Nhúng (Embedding): Tạo vector bằng mô hình keepitreal/vietnamese-sbert.
 
-
-
-
-Lưu trữ Vector:  Quản lý và lưu trữ các embedding vào Milvus để phục vụ truy xuất sau này.
-
-
-
-
-
+Lưu trữ Vector: Quản lý và lưu trữ các embedding vào Milvus để phục vụ truy xuất sau này.
 
 ![alt text](images/document-milvus.png)
-
-
-
-
-
-
-
 
 ![alt text](images/r233333.png)
 
