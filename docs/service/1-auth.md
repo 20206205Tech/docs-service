@@ -17,82 +17,82 @@ Mô tả chi tiết các chức năng:
 
 Hệ thống sử dụng các API Auth của Supabase để xử lý toàn bộ luồng đăng nhập, đăng ký và bảo mật tài khoản:
 
-xxxxxxxxxxxxxxxxx Đăng nhập bằng Google:
-yyyyyyyyyyyyyyyyyyy Tạo URL và chuyển hướng người dùng đến trang ủy quyền của Google thông qua Supabase Auth Provider.
-yyyyyyyyyyyyyyyyyyy Endpoint sử dụng : /auth/v1/authorize?provider=google&redirect_to={redirectUrl}
+- Đăng nhập bằng Google:
+- Tạo URL và chuyển hướng người dùng đến trang ủy quyền của Google thông qua Supabase Auth Provider.
+- Endpoint sử dụng : /auth/v1/authorize?provider=google&redirect_to={redirectUrl}
 
-xxxxxxxxxxxxxxxxx Đăng nhập bằng Email và Mật khẩu:
-yyyyyyyyyyyyyyyyyyy Cho phép người dùng đăng nhập bằng tài khoản email. Trả về thông tin Access Token và Refresh Token nếu thành công.
-yyyyyyyyyyyyyyyyyyy Endpoint sử dụng : /auth/v1/token?grant_type=password
+- Đăng nhập bằng Email và Mật khẩu:
+- Cho phép người dùng đăng nhập bằng tài khoản email. Trả về thông tin Access Token và Refresh Token nếu thành công.
+- Endpoint sử dụng : /auth/v1/token?grant_type=password
 
-xxxxxxxxxxxxxxxxx Đăng ký tài khoản mới:
-yyyyyyyyyyyyyyyyyyy Tạo tài khoản mới bằng Email và Mật khẩu, hỗ trợ gửi email xác nhận tài khoản thông qua đường dẫn chuyển hướng sau khi kích hoạt thành công ( redirect_to ).
-yyyyyyyyyyyyyyyyyyy Endpoint sử dụng : /auth/v1/signup
+- Đăng ký tài khoản mới:
+- Tạo tài khoản mới bằng Email và Mật khẩu, hỗ trợ gửi email xác nhận tài khoản thông qua đường dẫn chuyển hướng sau khi kích hoạt thành công ( redirect_to ).
+- Endpoint sử dụng : /auth/v1/signup
 
-xxxxxxxxxxxxxxxxx Khôi phục mật khẩu:
-yyyyyyyyyyyyyyyyyyy Gửi yêu cầu khôi phục mật khẩu tới email của người dùng. Hệ thống sẽ gửi một email chứa liên kết để xác thực và chuyển hướng người dùng về trang đổi mật khẩu.
-yyyyyyyyyyyyyyyyyyy Endpoint sử dụng : /auth/v1/recover
+- Khôi phục mật khẩu:
+- Gửi yêu cầu khôi phục mật khẩu tới email của người dùng. Hệ thống sẽ gửi một email chứa liên kết để xác thực và chuyển hướng người dùng về trang đổi mật khẩu.
+- Endpoint sử dụng : /auth/v1/recover
 
-xxxxxxxxxxxxxxxxx Cập nhật mật khẩu mới:
-yyyyyyyyyyyyyyyyyyy Cho phép người dùng đổi mật khẩu mới sau khi đã đăng nhập (hoặc sau khi click vào liên kết khôi phục mật khẩu).
-yyyyyyyyyyyyyyyyyyy Endpoint sử dụng : /auth/v1/user
+- Cập nhật mật khẩu mới:
+- Cho phép người dùng đổi mật khẩu mới sau khi đã đăng nhập (hoặc sau khi click vào liên kết khôi phục mật khẩu).
+- Endpoint sử dụng : /auth/v1/user
 
-xxxxxxxxxxxxxxxxx Làm mới Access Token:
-yyyyyyyyyyyyyyyyyyy Sử dụng refresh_token để lấy một access_token mới khi token cũ hết hạn mà không bắt người dùng phải đăng nhập lại.
-yyyyyyyyyyyyyyyyyyy Endpoint sử dụng : /auth/v1/token?grant_type=refresh_token
+- Làm mới Access Token:
+- Sử dụng refresh_token để lấy một access_token mới khi token cũ hết hạn mà không bắt người dùng phải đăng nhập lại.
+- Endpoint sử dụng : /auth/v1/token?grant_type=refresh_token
 
-xxxxxxxxxxxxxxxxx Đăng xuất:
-yyyyyyyyyyyyyyyyyyy Hủy phiên làm việc hiện tại của người dùng trên hệ thống Supabase.
-yyyyyyyyyyyyyyyyyyy Endpoint sử dụng : /auth/v1/logout
+- Đăng xuất:
+- Hủy phiên làm việc hiện tại của người dùng trên hệ thống Supabase.
+- Endpoint sử dụng : /auth/v1/logout
 
 ## II. Xác thực 2 yếu tố
 
 Hệ thống hỗ trợ phương thức xác thực hai yếu tố TOTP (Time-based One-Time Password - như Google Authenticator hay Authy) bằng các API nâng cao của Supabase:
 
-xxxxxxxxxxxxxxxxx Đăng ký thiết bị xác thực MFA mới:
-yyyyyyyyyyyyyyyyyyy Khởi tạo quá trình liên kết thiết bị xác thực mới. API trả về mã QR ( qr_code ), mã bí mật ( secret ), và chuỗi URI để người dùng quét trên ứng dụng Authenticator.
-yyyyyyyyyyyyyyyyyyy Endpoint sử dụng : /auth/v1/factors
+- Đăng ký thiết bị xác thực MFA mới:
+- Khởi tạo quá trình liên kết thiết bị xác thực mới. API trả về mã QR ( qr_code ), mã bí mật ( secret ), và chuỗi URI để người dùng quét trên ứng dụng Authenticator.
+- Endpoint sử dụng : /auth/v1/factors
 
-xxxxxxxxxxxxxxxxx Tạo thử thách xác thực:
-yyyyyyyyyyyyyyyyyyy Tạo một thử thách xác thực (challenge) dựa trên ID thiết bị MFA ( factorId ) để chuẩn bị so khớp với mã TOTP người dùng nhập.
-yyyyyyyyyyyyyyyyyyy Endpoint sử dụng : /auth/v1/factors/{factorId}/challenge
+- Tạo thử thách xác thực:
+- Tạo một thử thách xác thực (challenge) dựa trên ID thiết bị MFA ( factorId ) để chuẩn bị so khớp với mã TOTP người dùng nhập.
+- Endpoint sử dụng : /auth/v1/factors/{factorId}/challenge
 
-xxxxxxxxxxxxxxxxx Xác thực mã TOTP:
-yyyyyyyyyyyyyyyyyyy Kiểm tra mã TOTP gồm 6 chữ số người dùng nhập có khớp với thử thách hiện tại không. Nếu đúng, Supabase sẽ nâng cấp phiên đăng nhập (tăng cấp bảo mật cho Access Token).
-yyyyyyyyyyyyyyyyyyy Endpoint sử dụng : /auth/v1/factors/{factorId}/verify
+- Xác thực mã TOTP:
+- Kiểm tra mã TOTP gồm 6 chữ số người dùng nhập có khớp với thử thách hiện tại không. Nếu đúng, Supabase sẽ nâng cấp phiên đăng nhập (tăng cấp bảo mật cho Access Token).
+- Endpoint sử dụng : /auth/v1/factors/{factorId}/verify
 
-xxxxxxxxxxxxxxxxx Lấy danh sách các yếu tố MFA:
-yyyyyyyyyyyyyyyyyyy Lấy thông tin tài khoản người dùng để lọc ra danh sách các thiết bị/yếu tố xác thực đã liên kết, phân loại thành: tất cả thiết bị ( all ) và các thiết bị đã kích hoạt thành công ( active ).
-yyyyyyyyyyyyyyyyyyy Endpoint sử dụng : /auth/v1/user
+- Lấy danh sách các yếu tố MFA:
+- Lấy thông tin tài khoản người dùng để lọc ra danh sách các thiết bị/yếu tố xác thực đã liên kết, phân loại thành: tất cả thiết bị ( all ) và các thiết bị đã kích hoạt thành công ( active ).
+- Endpoint sử dụng : /auth/v1/user
 
-xxxxxxxxxxxxxxxxx Hủy liên kết/Xóa thiết bị MFA:
-yyyyyyyyyyyyyyyyyyy Xóa một thiết bị xác thực MFA khỏi tài khoản người dùng.
-yyyyyyyyyyyyyyyyyyy Endpoint sử dụng : /auth/v1/factors/{factorId}
+- Hủy liên kết/Xóa thiết bị MFA:
+- Xóa một thiết bị xác thực MFA khỏi tài khoản người dùng.
+- Endpoint sử dụng : /auth/v1/factors/{factorId}
 
-xxxxxxxxxxxxxxxxx Cập nhật tên hiển thị của thiết bị MFA:
-yyyyyyyyyyyyyyyyyyy Đổi tên hiển thị ( friendly_name ) của thiết bị xác thực (ví dụ: "Điện thoại cá nhân").
-yyyyyyyyyyyyyyyyyyy Endpoint sử dụng : /auth/v1/factors/{factorId}
+- Cập nhật tên hiển thị của thiết bị MFA:
+- Đổi tên hiển thị ( friendly_name ) của thiết bị xác thực (ví dụ: "Điện thoại cá nhân").
+- Endpoint sử dụng : /auth/v1/factors/{factorId}
 
 ## III. Quản lý Hồ sơ người dùng (Supabase cơ sở dữ liệu - PostgREST API)
 
 Hệ thống sử dụng cơ chế RESTful API tự động sinh từ PostgreSQL của Supabase (PostgREST) để thực hiện các thao tác CRUD trên bảng cơ sở dữ liệu profiles :
 
-xxxxxxxxxxxxxxxxx Lấy thông tin hồ sơ:
-yyyyyyyyyyyyyyyyyyy Truy vấn thông tin chi tiết hồ sơ người dùng (như tên đầy đủ, ảnh đại diện) từ bảng profiles dựa vào userId .
-yyyyyyyyyyyyyyyyyyy Endpoint sử dụng : /rest/v1/profiles?id=eq.{userId}
+- Lấy thông tin hồ sơ:
+- Truy vấn thông tin chi tiết hồ sơ người dùng (như tên đầy đủ, ảnh đại diện) từ bảng profiles dựa vào userId .
+- Endpoint sử dụng : /rest/v1/profiles?id=eq.{userId}
 
-xxxxxxxxxxxxxxxxx Cập nhật thông tin hồ sơ:
-yyyyyyyyyyyyyyyyyyy Cập nhật các trường thông tin hồ sơ như tên hiển thị ( full_name ) hoặc đường dẫn ảnh đại diện ( avatar_url ).
-yyyyyyyyyyyyyyyyyyy Endpoint sử dụng : /rest/v1/profiles?id=eq.{userId}
+- Cập nhật thông tin hồ sơ:
+- Cập nhật các trường thông tin hồ sơ như tên hiển thị ( full_name ) hoặc đường dẫn ảnh đại diện ( avatar_url ).
+- Endpoint sử dụng : /rest/v1/profiles?id=eq.{userId}
 
 ## IV. Quản lý Ảnh đại diện (Supabase Storage)
 
 Hệ thống sử dụng dịch vụ lưu trữ tệp (Storage) của Supabase để quản lý hình ảnh của người dùng:
 
-xxxxxxxxxxxxxxxxx Tải lên ảnh đại diện:
-yyyyyyyyyyyyyyyyyyy Tải tệp tin ảnh của người dùng lên thư mục avatars trên Supabase Storage. Tên tệp được sinh ngẫu nhiên kết hợp với userId để tránh trùng lặp.
-yyyyyyyyyyyyyyyyyyy Endpoint tải lên : /storage/v1/object/avatars/{fileName}
-yyyyyyyyyyyyyyyyyyy Đường dẫn công khai nhận về : /storage/v1/object/public/avatars/{fileName}
+- Tải lên ảnh đại diện:
+- Tải tệp tin ảnh của người dùng lên thư mục avatars trên Supabase Storage. Tên tệp được sinh ngẫu nhiên kết hợp với userId để tránh trùng lặp.
+- Endpoint tải lên : /storage/v1/object/avatars/{fileName}
+- Đường dẫn công khai nhận về : /storage/v1/object/public/avatars/{fileName}
 
 Thông tin payload của JWT từ supabase
 
