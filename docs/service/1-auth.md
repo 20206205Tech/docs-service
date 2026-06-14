@@ -168,9 +168,11 @@ Trong thư mục di chuyển cơ sở dữ liệu có các file quản lý kết
 <!-- Tạo bucket persona_audios  lưu thông tin file  âm thanh lời chào nhân vật  -->
 
 Kết quả bucket trên supabase
+
 ![alt text](images/auth-supabase-bucket.png)
 
 Kết quả cơ sở dữ liệu trên supabase
+
 ![alt text](images/auth-supabase-database.png)
 
 Để các dịch vụ khác dễ dàng phát triển, em tạo các gói thư viện dùng chung để các dịch vụ sử dụng
