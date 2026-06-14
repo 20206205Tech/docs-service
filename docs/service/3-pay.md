@@ -61,7 +61,8 @@ và triển khai trên Heroku.
 Heroku tự đóng gói dịch vụ bằng Docker
 và chạy khi đã pass test trong CI/CD github action.
 Heroku có hỗ trợ kết nối
-với Kafka cũng như Redis để chạy BullMQ.
+với database postgres, kafka
+cũng như redis để chạy BullMQ.
 
 Triển khai Dịch vụ thanh toán (payment service) độc lập tại heroku
 
