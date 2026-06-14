@@ -10,26 +10,36 @@ Sơ đồ tổng quan về Dịch vụ trò chuyện (conversation service) và 
 
 
 
-![alt text](images/r2chat.png)
 
 
-![alt text](images/conversation-lint.png)
+
+
 
 
 ![alt text](images/conversation-swagger.png)
+
+
+![alt text](images/chatbot-swagger.png)
+
+
+
+
+
 ![alt text](images/conversation-PR.png)
-![alt text](images/conversation-database.png)
+![alt text](images/conversation-lint.png)
 
 
 
 ![alt text](images/conversation-database-migration.png)
-
-
-
-![alt text](images/chatbot-swagger.png)
-![alt text](images/chatbot-database.png)
+![alt text](images/conversation-database.png)
 
 ![alt text](images/chatbot-database-migration.png)
+![alt text](images/chatbot-database.png)
+
+![alt text](images/r2chat.png)
+
+
+
 
 
 <!-- Chưa cần vì hết chức năng -->

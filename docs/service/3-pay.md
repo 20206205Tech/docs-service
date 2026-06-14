@@ -147,3 +147,8 @@ sepay
 <!-- 6: Đang thiếu phần hóa đơn (Để sau) -->
 
 ![alt text](images/payment-mail.png)
+
+
+
+Dữ liệu thanh toán trong redis
+![alt text](images/payment-redis.png)
