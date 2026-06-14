@@ -84,6 +84,9 @@ Các bước CI/CD tự động test trên github action
 
 ![alt text](images/payment-test.png)
 
+
+![alt text](payment-test.png)
+
 Quản lý các di chuyển cơ sở dữ liệu trong github action
 
 ![alt text](images/payment-database-migration.png)
