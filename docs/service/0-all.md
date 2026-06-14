@@ -40,6 +40,9 @@ triển khai trong vercel.
 Các dịch vụ NestJS
 sử dụng codecov cho việc test
 
+
+
+
 ![alt text](images/test-codecov.png)
 
 Tích hợp sonarqube
