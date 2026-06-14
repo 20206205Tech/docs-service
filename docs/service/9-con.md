@@ -4,16 +4,7 @@ Sơ đồ tổng quan về Dịch vụ trò chuyện (conversation service) và 
 
 ![alt text](images/conversation-and-chatbot-overview.png)
 
-<!-- ![alt text](images/conversation-PR.png) -->
-<!-- ![alt text](images/conversation-lint.png) -->
 
-<!-- ![alt text](images/conversation-database-migration.png) -->
-<!-- ![alt text](images/conversation-database.png) -->
-
-<!-- ![alt text](images/chatbot-database-migration.png) -->
-<!-- ![alt text](images/chatbot-database.png) -->
-
-<!-- ![alt text](images/r2chat.png) -->
 
 
 <!-- Dịch vụ trò chuyện (conversation service)  -->
@@ -63,6 +54,24 @@ Cung cấp URL công khai có shareId và token
 
 Chủ sở hữu đoạn chat có thể xem danh sách các liên kết đã tạo và thu hồi quyền truy cập bất cứ lúc nào.
 
+
+
+
+
+
+
+
+
+![alt text](images/conversation-PR.png)
+![alt text](images/conversation-lint.png)
+
+![alt text](images/conversation-database-migration.png)
+![alt text](images/conversation-database.png)
+
+
+
+
+
 <!-- Dịch vụ chatbot (chatbot service) -->
 
 ![alt text](images/chatbot-swagger.png)
@@ -75,6 +84,18 @@ về lịch sử các cuộc trò chuyện
 và chi tiết thông tin suy luận, nguồn tài liệu của từng câu trả lời của cuộc trò chuyện.
 Lắng nghe RabbitMQ để tạo và thu hồi chia sẻ trò chuyện.
 Lắng nghe Livekit để thực hiện chức năng trò chuyện giọng nói với người dùng.
+
+
+
+
+
+
+![alt text](images/chatbot-database-migration.png)
+![alt text](images/chatbot-database.png)
+
+
+
+
 
 <!-- Chi tiết về chức năng giọng nói: -->
 
@@ -125,3 +146,13 @@ agent_state_changed và user_state_changed:
 Theo dõi trạng thái thay đổi của AI và User.
 
 function_tools_executed: Kích hoạt khi AI quyết định gọi một công cụ bên ngoài (Function Calling).
+
+
+
+![alt text](<voice-clean_transcript.png>)
+
+
+
+
+
+![alt text](images/r2chat.png)
