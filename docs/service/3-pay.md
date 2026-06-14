@@ -148,7 +148,5 @@ sepay
 
 ![alt text](images/payment-mail.png)
 
-
-
 Dữ liệu thanh toán trong redis
 ![alt text](images/payment-redis.png)

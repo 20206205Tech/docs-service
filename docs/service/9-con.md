@@ -1,34 +1,15 @@
 # Dịch vụ trò chuyện (conversation service) và Dịch vụ chatbot (chatbot service)
 
-
-
 Sơ đồ tổng quan về Dịch vụ trò chuyện (conversation service) và Dịch vụ chatbot (chatbot service)
 
 ![alt text](images/conversation-and-chatbot-overview.png)
 
-
-
-
-
-
-
-
-
-
-
 ![alt text](images/conversation-swagger.png)
-
 
 ![alt text](images/chatbot-swagger.png)
 
-
-
-
-
 ![alt text](images/conversation-PR.png)
 ![alt text](images/conversation-lint.png)
-
-
 
 ![alt text](images/conversation-database-migration.png)
 ![alt text](images/conversation-database.png)
@@ -37,10 +18,6 @@ Sơ đồ tổng quan về Dịch vụ trò chuyện (conversation service) và 
 ![alt text](images/chatbot-database.png)
 
 ![alt text](images/r2chat.png)
-
-
-
-
 
 <!-- Chưa cần vì hết chức năng -->
 <!-- x: Nhận thông tin sự kiện thanh toán thành công kafka -->
