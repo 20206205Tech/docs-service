@@ -78,6 +78,8 @@ Thông tin kiểm tra tự động của Pull Request trên GitHub
 
 ![alt text](images/payment-PR.png)
 
+
+
 Các bước CI/CD tự động test trên github action
 
 ![alt text](images/payment-test.png)
@@ -94,6 +96,8 @@ Các bảng có trong cơ sở dữ liệu của Dịch vụ thanh toán (paymen
 
 
 ![alt text](images/payment-database.png)
+
+
 
 
 
